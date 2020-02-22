@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"time"
+	"fmt"
 )
 
 // Pin represents a single pin, which can be used either for reading or writing
@@ -21,7 +22,11 @@ func NewInput(p uint) Pin {
 	exportGPIO(pin)
 	time.Sleep(10 * time.Millisecond)
 	pin.direction = inDirection
-	setDirection(pin, inDirection, 0)
+	if err := setDirection(pin, inDirection, 0); err != nil {
+		fmt.Println(err)
+		fmt.Println("Trying to set direction again...")
+		setDirection(pin, inDirection, 0)
+	}
 	pin = openPin(pin, false)
 	return pin
 }
