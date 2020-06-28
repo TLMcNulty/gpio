@@ -22,11 +22,7 @@ func NewInput(p uint) Pin {
 	exportGPIO(pin)
 	time.Sleep(10 * time.Millisecond)
 	pin.direction = inDirection
-	if err := setDirection(pin, inDirection, 0); err != nil {
-		fmt.Println(err)
-		fmt.Println("Trying to set direction again...")
-		setDirection(pin, inDirection, 0)
-	}
+	setDirection(pin, inDirection, 0)
 	pin = openPin(pin, false)
 	return pin
 }
