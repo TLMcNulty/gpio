@@ -4,7 +4,6 @@ import (
 	"errors"
 	"os"
 	"time"
-	"fmt"
 )
 
 // Pin represents a single pin, which can be used either for reading or writing
